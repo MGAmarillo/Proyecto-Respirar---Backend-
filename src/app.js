@@ -2,7 +2,7 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import createError from 'http-errors'
-import { stationsRouter } from './routes/stations.js'
+import { stationsRouter } from './routes/stationsRouter.js'
 import { indexRouter } from './routes/indexRouter.js'
 
 const app = express()
