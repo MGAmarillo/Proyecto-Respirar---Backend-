@@ -1,4 +1,4 @@
-import { getAllStationsFromOrion } from '../domain/fakeOrionService.js'
+import { getAllStationsFromOrion } from '../domain/orionService.js'
 
 const retrieveAllStations = async () => {
   const allStations = await getAllStationsFromOrion()
@@ -16,15 +16,15 @@ const retrieveAllStationsFromUser = async (userId) => {
 
 const mapStation = (station) => {
   return {
-    name: station.address.streetAddress,
-    temperature: station.temperature,
-    reliability: station.reliability,
-    pm1: station.pm1,
-    pm10: station.pm10,
-    pm25: station.pm25,
+    name: station.address?.value?.streetAddress,
+    temperature: station.temperature?.value,
+    reliability: station.reliability?.value,
+    pm1: station.PM1?.value,
+    pm10: station.PM10?.value,
+    pm25: station.PM25?.value,
     coordinates: {
-      latitude: station.location.coordinates[0],
-      longitude: station.location.coordinates[1]
+      latitude: station.location?.value?.coordinates[0],
+      longitude: station.location?.value?.coordinates[1]
     }
   }
 }
