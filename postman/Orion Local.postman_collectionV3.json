@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "33289257-c19c-46c6-8ac1-98e2b1891e80",
+		"name": "Orion Local",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27099758"
+	},
+	"item": [
+		{
+			"name": "Crear Station",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "$AUTH_TOKEN",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"Madrid-AmbientObserved-28079004-2016-03-15T11:00:00\",\r\n  \"type\": \"AirQualityObserved\",\r\n  \"dateObserved\": {\r\n    \"value\": \"2016-03-15T11:00:00/2016-03-15T12:00:00\"\r\n  },\r\n  \"areaServed\": {\r\n    \"value\": \"Brooklands\"\r\n  },\r\n  \"airQualityLevel\": {\r\n    \"value\": \"moderate\"\r\n  },\r\n  \"CO\": {\r\n    \"value\": 500,\r\n    \"metadata\": {\r\n      \"unitCode\": {\r\n        \"value\": \"GP\"\r\n      }\r\n    }\r\n  },\r\n  \"temperature\": {\r\n    \"value\": 12.2\r\n  },\r\n  \"NO\": {\r\n    \"value\": 45,\r\n    \"metadata\": {\r\n      \"unitCode\": {\r\n        \"value\": \"GQ\"\r\n      }\r\n    }\r\n  },\r\n  \"refPointOfInterest\": {\r\n    \"type\": \"Relationship\",\r\n    \"value\": \"28079004-Pza.deEspanya\"\r\n  },\r\n  \"windDirection\": {\r\n    \"value\": 186\r\n  },\r\n  \"source\": {\r\n    \"value\": \"http://datos.madrid.es\"\r\n  },\r\n  \"windSpeed\": {\r\n    \"value\": 0.64\r\n  },\r\n  \"SO2\": {\r\n    \"value\": 11,\r\n    \"metadata\": {\r\n      \"unitCode\": {\r\n        \"value\": \"GQ\"\r\n      }\r\n    }\r\n  },\r\n  \"NOx\": {\r\n    \"value\": 139,\r\n    \"metadata\": {\r\n      \"unitCode\": {\r\n        \"value\": \"GQ\"\r\n      }\r\n    }\r\n  },\r\n  \"location\": {\r\n    \"type\": \"geo:json\",\r\n    \"value\": {\r\n      \"type\": \"Point\",\r\n      \"coordinates\": [-34.53766730909449, -58.49679813949018]\r\n    }\r\n  },\r\n  \"typeOfLocation\": {\r\n    \"value\": \"outdoor\"\r\n  },\r\n  \"airQualityIndex\": {\r\n    \"value\": 65\r\n  },\r\n  \"address\": {\r\n    \"type\": \"PostalAddress\",\r\n    \"value\": {\r\n      \"addressCountry\": \"ES\",\r\n      \"addressLocality\": \"Madrid\",\r\n      \"streetAddress\": \"Plaza de Espa\\u00f1a\"\r\n    }\r\n  },\r\n  \"reliability\": {\r\n    \"value\": 0.7\r\n  },\r\n  \"relativeHumidity\": {\r\n    \"value\": 0.54\r\n  },\r\n  \"precipitation\": {\r\n    \"value\": 0\r\n  },\r\n  \"NO2\": {\r\n    \"value\": 69,\r\n    \"metadata\": {\r\n      \"unitCode\": {\r\n        \"value\": \"GQ\"\r\n      }\r\n    }\r\n  },\r\n  \"CO_Level\": {\r\n    \"value\": \"moderate\"\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "localhost:1026/v2/entities",
+					"host": [
+						"localhost"
+					],
+					"port": "1026",
+					"path": [
+						"v2",
+						"entities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Traer Todas las Stations",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"disabled": true
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "$AUTH_TOKEN",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:1026/v2/entities",
+					"host": [
+						"localhost"
+					],
+					"port": "1026",
+					"path": [
+						"v2",
+						"entities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Traer Station por ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"disabled": true
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "$AUTH_TOKEN",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:1026/v2/entities/1",
+					"host": [
+						"localhost"
+					],
+					"port": "1026",
+					"path": [
+						"v2",
+						"entities",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
