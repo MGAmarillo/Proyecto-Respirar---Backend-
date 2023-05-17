@@ -4,6 +4,7 @@ import logger from 'morgan'
 import createError from 'http-errors'
 import { stationsRouter } from './routes/stationsRouter.js'
 import { indexRouter } from './routes/indexRouter.js'
+import { userRouter } from './routes/userRouter.js'
 
 const app = express()
 
@@ -27,6 +28,7 @@ app.use(cookieParser())
 
 app.use('/', indexRouter)
 app.use('/stations', stationsRouter)
+app.use('/users', userRouter)
 
 app.options('/*', (_, res) => {
   res.sendStatus(200)
