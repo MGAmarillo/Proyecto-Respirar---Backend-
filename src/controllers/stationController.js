@@ -1,4 +1,4 @@
-import { getAllStationsFromOrion } from '../domain/orionService.js'
+import { getAllStationsFromOrion} from '../domain/orionService.js'
 
 const retrieveAllStations = async () => {
   const allStations = await getAllStationsFromOrion()
