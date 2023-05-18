@@ -14,7 +14,7 @@ const getAllStationsFromOrion = async (userId) => {
     const parsedId = parseInt(userId)
     // si existiera la manera de pedir a orion las estaciones de un user sería ideal solo pedir esas y no filtrar
     const filteredStations = stations.data.filter(
-      (station) => station.userId === parsedId
+      (station) => station?.userId?.value === parsedId
     )
     return Promise.resolve(filteredStations)
   }

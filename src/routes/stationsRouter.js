@@ -1,17 +1,14 @@
 import express from 'express'
-import { retrieveAllStations, retrieveAllStationsFromUser } from '../controllers/stationController.js'
-// import { auth } from '../middlewares/auth.js'
+import { retrieveAllStations } from '../controllers/stationController.js'
+import { getUser } from '../middlewares/auth.js'
 
 const stationsRouter = express.Router()
-// stationsRouter.use(auth)
 
 /* GET stations listing. */
 stationsRouter.get('/', async (req, res, next) => {
-  res.send(await retrieveAllStations())
-})
+  const user = getUser(req)
 
-stationsRouter.get('/user/:userId', async (req, res, next) => {
-  res.send(await retrieveAllStationsFromUser(req.params.userId))
+  res.send(await retrieveAllStations(user, req.query.onlyUserStations))
 })
 
 export { stationsRouter }
