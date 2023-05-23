@@ -1,4 +1,5 @@
 import { getAllStationsFromOrion } from '../domain/orionService.js'
+import { getHistory } from '../domain/fakeStationHistory.js'
 
 const retrieveAllStations = async (user, onlyUserStations) => {
   if (user && onlyUserStations) {
@@ -12,6 +13,12 @@ const retrieveAllStations = async (user, onlyUserStations) => {
   return Promise.resolve(
     allStations.map(station => mapStation(station))
   )
+}
+
+// stationId: identificador único de la estación, time: DAY/MONTH/YEAR, parameter: TEMPERATURE/PM#/LOQUESEA
+const retrieveStationHistory = async (stationId, time, parameter) => {
+  // si no estuviera mockeado, antes de devolverlo iría el mapeo.
+  return Promise.resolve(getHistory(stationId, time, parameter));
 }
 
 const mapStation = (station) => {
@@ -29,4 +36,4 @@ const mapStation = (station) => {
   }
 }
 
-export { retrieveAllStations }
+export { retrieveAllStations, retrieveStationHistory }
