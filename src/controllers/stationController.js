@@ -1,16 +1,16 @@
 import { getAllStationsFromOrion } from '../domain/orionService.js'
 
-const retrieveAllStations = async () => {
+const retrieveAllStations = async (user, onlyUserStations) => {
+  if (user && onlyUserStations) {
+    const allStationsFromUser = await getAllStationsFromOrion(user.id)
+    return Promise.resolve(
+      allStationsFromUser.map(station => mapStation(station))
+    )
+  }
+
   const allStations = await getAllStationsFromOrion()
   return Promise.resolve(
     allStations.map(station => mapStation(station))
-  )
-}
-
-const retrieveAllStationsFromUser = async (userId) => {
-  const allStationsFromUser = await getAllStationsFromOrion(userId)
-  return Promise.resolve(
-    allStationsFromUser.map(station => mapStation(station))
   )
 }
 
@@ -29,4 +29,4 @@ const mapStation = (station) => {
   }
 }
 
-export { retrieveAllStationsFromUser, retrieveAllStations }
+export { retrieveAllStations }

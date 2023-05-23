@@ -16,4 +16,13 @@ const auth = (req, res, next) => {
   }
 }
 
-export { auth }
+const getUser = (req) => {
+  if (!req.header('Authorization')) {
+    return undefined
+  }
+
+  const token = req.header('Authorization').replace('Bearer ', '')
+  return jwt.verify(token, 'unaclavesupersecreta')
+}
+
+export { auth, getUser }
