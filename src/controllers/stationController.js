@@ -24,6 +24,7 @@ const retrieveStationHistory = async (stationId, time, parameter) => {
 const mapStation = (station) => {
   return {
     name: station.address?.value?.streetAddress,
+    id: station.id,
     temperature: station.temperature?.value,
     reliability: station.reliability?.value,
     pm1: station.PM1?.value,

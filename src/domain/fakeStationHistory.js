@@ -1,5 +1,6 @@
 const stationHistory = {
-  temperature: [
+  label: 'Temperatura',
+  values: [
     {
       date: '2023-05-23T00:00:00+00:00',
       value: 12
