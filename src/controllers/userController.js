@@ -13,8 +13,11 @@ const login = async (username, password) => {
   if (!isMatch) {
     throw new Error('Credenciales no validas')
   }
+  const token = await generateToken(user)
 
-  return await generateToken(user)
+  return {
+    username, token
+  }
 }
 
 export { login }
