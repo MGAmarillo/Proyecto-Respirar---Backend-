@@ -13,8 +13,9 @@ userRouter.post('/login', body('username').isEmail(),
       return res.status(400).json({ errors: errors.array() })
     }
     try {
-      const token = await login(req.body.username, req.body.password)
-      res.send({ token })
+      const response = await login(req.body.username, req.body.password)
+      console.log(response)
+      res.send(response)
     } catch (error) {
       res.status(401).send(error.message)
     }
