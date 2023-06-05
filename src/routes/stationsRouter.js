@@ -12,7 +12,7 @@ stationsRouter.get('/', async (req, res, next) => {
 })
 
 stationsRouter.get('/history', async (req, res, next) => {
-  res.send(await retrieveStationHistory(req.query.stationId, req.query.time, req.query.parameter))
+  res.send(await retrieveStationHistory(req.query.stationId, req.query.fromDate, req.query.toDate, req.query.parameter))
 })
 
 export { stationsRouter }

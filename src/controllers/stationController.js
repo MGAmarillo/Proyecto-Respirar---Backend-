@@ -17,10 +17,10 @@ const retrieveAllStations = async (user, onlyUserStations) => {
 }
 
 // stationId: identificador único de la estación, time: DAY/MONTH/YEAR, parameter: TEMPERATURE/PM#/LOQUESEA
-const retrieveStationHistory = async (stationId, time, parameter) => {
+const retrieveStationHistory = async (stationId, fromDate, toDate, parameter) => {
   // mock para llenar el front con data
   // return Promise.resolve(getHistory(stationId, time, parameter))
-  const result = await getHistoricDataFromStation(stationId, parameter)
+  const result = await getHistoricDataFromStation(stationId, fromDate, toDate, parameter)
   const finalResult = {
     label: parameter,
     values: mapHistoricResult(result)

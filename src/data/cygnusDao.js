@@ -4,13 +4,17 @@ import 'dotenv/config'
 const database = process.env.CYGNUS_DATABASE
 // const database = 'sth_default'
 
-const getHistoricDataFromStation = async (stationId, parameter) => {
+const getHistoricDataFromStation = async (stationId, fromDate, toDate, parameter) => {
   const collection = 'sth_/_' + stationId + '_AirQualityObserved'
   const conn = await getConnection()
+  const parsedFromDate = new Date(fromDate)
+  parsedFromDate.setUTCHours(0, 0, 0, 0)
+  const parsedToDate = new Date(toDate)
+  // esto es por si se elige el día de hoy, poder mostrar los cambios del día
+  parsedToDate.setUTCHours(23, 59, 59, 999)
   return await conn.db(database)
     .collection(collection)
-    // TODO filter by time
-    .find({ attrName: parameter })
+    .find({ attrName: parameter, recvTime: { $gte: parsedFromDate, $lt: parsedToDate } })
     .toArray()
 }
 
