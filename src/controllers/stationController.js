@@ -1,5 +1,6 @@
 import { getAllStationsFromOrion } from '../domain/orionService.js'
-import { getHistory } from '../domain/fakeStationHistory.js'
+// import { getHistory } from '../domain/fakeStationHistory.js'
+import { getHistoricDataFromStation } from '../data/cygnusDao.js'
 
 const retrieveAllStations = async (user, onlyUserStations) => {
   if (user && onlyUserStations) {
@@ -17,8 +18,14 @@ const retrieveAllStations = async (user, onlyUserStations) => {
 
 // stationId: identificador único de la estación, time: DAY/MONTH/YEAR, parameter: TEMPERATURE/PM#/LOQUESEA
 const retrieveStationHistory = async (stationId, time, parameter) => {
-  // si no estuviera mockeado, antes de devolverlo iría el mapeo.
-  return Promise.resolve(getHistory(stationId, time, parameter));
+  // mock para llenar el front con data
+  // return Promise.resolve(getHistory(stationId, time, parameter))
+  const result = await getHistoricDataFromStation(stationId, parameter)
+  const finalResult = {
+    label: parameter,
+    values: mapHistoricResult(result)
+  }
+  return Promise.resolve(finalResult)
 }
 
 const mapStation = (station) => {
@@ -34,6 +41,17 @@ const mapStation = (station) => {
       latitude: station.location?.value?.coordinates[0],
       longitude: station.location?.value?.coordinates[1]
     }
+  }
+}
+
+const mapHistoricResult = (result) => {
+  if (result) {
+    return result.map(entry => {
+      return {
+        date: entry.recvTime,
+        value: entry.attrValue
+      }
+    })
   }
 }
 

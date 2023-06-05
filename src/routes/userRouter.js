@@ -8,13 +8,11 @@ userRouter.post('/login', body('username').isEmail(),
   body('password').isString(),
   async (req, res) => {
     const errors = validationResult(req)
-
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() })
     }
     try {
       const response = await login(req.body.username, req.body.password)
-      console.log(response)
       res.send(response)
     } catch (error) {
       res.status(401).send(error.message)
