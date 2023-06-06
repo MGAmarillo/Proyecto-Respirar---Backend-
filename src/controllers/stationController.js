@@ -5,15 +5,21 @@ import { getHistoricDataFromStation } from '../data/cygnusDao.js'
 const retrieveAllStations = async (user, onlyUserStations) => {
   if (user && onlyUserStations) {
     const allStationsFromUser = await getAllStationsFromOrion(user.id)
-    return Promise.resolve(
-      allStationsFromUser.map(station => mapStation(station))
-    )
+    if (allStationsFromUser) {
+      return Promise.resolve(
+        allStationsFromUser.map(station => mapStation(station))
+      )
+    }
   }
 
   const allStations = await getAllStationsFromOrion()
-  return Promise.resolve(
-    allStations.map(station => mapStation(station))
-  )
+  if (allStations) {
+    return Promise.resolve(
+      allStations.map(station => mapStation(station))
+    )
+  }
+
+  return Promise.resolve([])
 }
 
 // stationId: identificador único de la estación, time: DAY/MONTH/YEAR, parameter: TEMPERATURE/PM#/LOQUESEA
