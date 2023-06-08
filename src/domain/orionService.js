@@ -1,9 +1,11 @@
 import axios from 'axios'
+import 'dotenv/config'
 
-// harcodeado por ahora
-const orionBaseURL = 'http://localhost:1026/v2/entities'
+const orionBaseURL = process.env.ORION_BASE_URL
+// const orionBaseURL = 'http://localhost:1026/v2/entities'
 
 const getAllStationsFromOrion = async (userId) => {
+  console.log(orionBaseURL)
   let stations
   try {
     stations = await axios.get(orionBaseURL)

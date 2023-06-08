@@ -139,7 +139,7 @@
 			"response": []
 		},
 		{
-			"name": "Notificar a Cygnus de estacion 2",
+			"name": "Notificar a Cygnus de estacion",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -160,7 +160,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"description\": \"Notify Cygnus Mongo-DB of all context changes\",\n  \"subject\": {\n    \"entities\": [\n      {\n        \"idPattern\": \".*\"\n      }\n    ]\n  },\n  \"notification\": {\n    \"http\": {\n      \"url\": \"http://cygnus:5051/notify\"\n    }\n  },\n  \"throttling\": 5\n}"
+					"raw": "{\n  \"description\": \"Notify Cygnus Mongo-DB of all context changes\",\n  \"subject\": {\n    \"entities\": [\n      {\n        \"idPattern\": \"station-1\"\n      }\n    ]\n  },\n  \"notification\": {\n    \"http\": {\n      \"url\": \"http://cygnus:5051/notify\"\n    }\n  },\n  \"throttling\": 5\n}"
 				},
 				"url": {
 					"raw": "http://localhost:1026/v2/subscriptions",
@@ -178,13 +178,13 @@
 			"response": []
 		},
 		{
-			"name": "Actualizar humedad de la entidad Copy",
+			"name": "Actualizar SO2 station-1",
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"value\": 10\r\n}",
+					"raw": "{\r\n  \"value\": 25\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -192,7 +192,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:1026/v2/entities/exampleEntity/attrs/humidity",
+					"raw": "http://localhost:1026/v2/entities/station-1/attrs/SO2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -201,9 +201,9 @@
 					"path": [
 						"v2",
 						"entities",
-						"exampleEntity",
+						"station-1",
 						"attrs",
-						"humidity"
+						"SO2"
 					]
 				}
 			},
