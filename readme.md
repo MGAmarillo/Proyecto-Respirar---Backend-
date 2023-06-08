@@ -66,10 +66,12 @@ Importar la [Colección de Postman](localOrion/Orion%20Local.postman_collection.
 
 **GET** `/stations` Devuelve todas las estaciones
 
-**GET** `/stations/{stationId}` Devuelve la evolución histórica de un parámetro de una estación  (detalles en query params)
+**GET** `/stations/{stationId}/history` Devuelve la evolución histórica de un parámetro de una estación  (detalles en query params)
 ```url
-stations/history?stationId={stationId}&fromDate={fromDate}&toDate={toDate}&parameter={parameter}
+stations/{stationId}/history?fromDate={fromDate}&toDate={toDate}&parameter={parameter}
 ```
+
+**GET** `/stations/{stationId}/availableparams` Devuelve una lista de los parametros de los que se tiene evolución histórica de una estación específica
 
 
 **POST** `/user/login` Logueo de usuario (devuelve JWT) - 

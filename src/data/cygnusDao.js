@@ -18,4 +18,12 @@ const getHistoricDataFromStation = async (stationId, fromDate, toDate, parameter
     .toArray()
 }
 
-export { getHistoricDataFromStation }
+const getAvailableParamsForStation = async (stationId) => {
+  const conn = await getConnection()
+  const collection = 'sth_/_' + stationId + '_AirQualityObserved'
+  return await conn.db(database)
+    .collection(collection)
+    .distinct('attrName', { attrType: 'Number' })
+}
+
+export { getHistoricDataFromStation, getAvailableParamsForStation }

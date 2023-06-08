@@ -1,6 +1,6 @@
 import { getAllStationsFromOrion } from '../domain/orionService.js'
 // import { getHistory } from '../domain/fakeStationHistory.js'
-import { getHistoricDataFromStation } from '../data/cygnusDao.js'
+import { getHistoricDataFromStation, getAvailableParamsForStation } from '../data/cygnusDao.js'
 
 const retrieveAllStations = async (user, onlyUserStations) => {
   if (user && onlyUserStations) {
@@ -34,6 +34,10 @@ const retrieveStationHistory = async (stationId, fromDate, toDate, parameter) =>
   return Promise.resolve(finalResult)
 }
 
+const retrieveAvailableParams = async (stationId) => {
+  return Promise.resolve(getAvailableParamsForStation(stationId))
+}
+
 const mapStation = (station) => {
   return {
     name: station.address?.value?.streetAddress,
@@ -61,4 +65,4 @@ const mapHistoricResult = (result) => {
   }
 }
 
-export { retrieveAllStations, retrieveStationHistory }
+export { retrieveAllStations, retrieveStationHistory, retrieveAvailableParams }
