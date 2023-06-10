@@ -1,24 +1,41 @@
 import { getAllStationsFromOrion } from '../domain/orionService.js'
-import { getHistory } from '../domain/fakeStationHistory.js'
+// import { getHistory } from '../domain/fakeStationHistory.js'
+import { getHistoricDataFromStation, getAvailableParamsForStation } from '../data/cygnusDao.js'
 
 const retrieveAllStations = async (user, onlyUserStations) => {
   if (user && onlyUserStations) {
     const allStationsFromUser = await getAllStationsFromOrion(user.id)
-    return Promise.resolve(
-      allStationsFromUser.map(station => mapStation(station))
-    )
+    if (allStationsFromUser) {
+      return Promise.resolve(
+        allStationsFromUser.map(station => mapStation(station))
+      )
+    }
   }
 
   const allStations = await getAllStationsFromOrion()
-  return Promise.resolve(
-    allStations.map(station => mapStation(station))
-  )
+  if (allStations) {
+    return Promise.resolve(
+      allStations.map(station => mapStation(station))
+    )
+  }
+
+  return Promise.resolve([])
 }
 
 // stationId: identificador único de la estación, time: DAY/MONTH/YEAR, parameter: TEMPERATURE/PM#/LOQUESEA
-const retrieveStationHistory = async (stationId, time, parameter) => {
-  // si no estuviera mockeado, antes de devolverlo iría el mapeo.
-  return Promise.resolve(getHistory(stationId, time, parameter));
+const retrieveStationHistory = async (stationId, fromDate, toDate, parameter) => {
+  // mock para llenar el front con data
+  // return Promise.resolve(getHistory(stationId, time, parameter))
+  const result = await getHistoricDataFromStation(stationId, fromDate, toDate, parameter)
+  const finalResult = {
+    label: parameter,
+    values: mapHistoricResult(result)
+  }
+  return Promise.resolve(finalResult)
+}
+
+const retrieveAvailableParams = async (stationId) => {
+  return Promise.resolve(getAvailableParamsForStation(stationId))
 }
 
 const mapStation = (station) => {
@@ -37,4 +54,15 @@ const mapStation = (station) => {
   }
 }
 
-export { retrieveAllStations, retrieveStationHistory }
+const mapHistoricResult = (result) => {
+  if (result) {
+    return result.map(entry => {
+      return {
+        date: entry.recvTime,
+        value: entry.attrValue
+      }
+    })
+  }
+}
+
+export { retrieveAllStations, retrieveStationHistory, retrieveAvailableParams }
