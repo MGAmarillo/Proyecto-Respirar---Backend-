@@ -59,8 +59,20 @@ Importar la [Colección de Postman](localOrion/Orion%20Local.postman_collection.
 
 ****
 
-// TODO -> sumar info de como correr dockerizado
+## Correr imagen de docker
+#### 1- Crear imágen ####
+En el directorio raíz del proyecto, correr:
+```bash
+$ docker build -f Dockerfile -t patricioc7/espirar-mapas-backend .
+```
 
+#### 2- Correr imágen ####
+En el directorio raíz del proyecto, correr:
+```bash
+$ docker run -e CYGNUS_DATABASE=sth_default -p 3001:3001 -e MONGODB_URI="{MONGODB_URI}" -e ORION_BASE_URL="{ORION_BASE_URL}" -e CYGNUS_DATABASE="{CYGNUS_DATABASE}" patricioc7/espirar-mapas-backend
+```
+
+****
 
 ## Endpoints
 
