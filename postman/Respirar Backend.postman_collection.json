@@ -21,15 +21,90 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3001/users/login",
+					"raw": "http://localhost:3031/users/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3001",
+					"port": "3031",
 					"path": [
 						"users",
 						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve station",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3031/stations/station-1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3031",
+					"path": [
+						"stations",
+						"station-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrive all stations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3031/stations/station-1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3031",
+					"path": [
+						"stations",
+						"station-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "History",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3031/stations/station-1/history?fromDate=2023-06-16&toDate=2023-06-16&parameter=temperature",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3031",
+					"path": [
+						"stations",
+						"station-1",
+						"history"
+					],
+					"query": [
+						{
+							"key": "fromDate",
+							"value": "2023-06-16"
+						},
+						{
+							"key": "toDate",
+							"value": "2023-06-16"
+						},
+						{
+							"key": "parameter",
+							"value": "temperature"
+						}
 					]
 				}
 			},
