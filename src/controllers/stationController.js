@@ -55,6 +55,8 @@ const mapStation = (station) => {
     name: station.address?.value?.streetAddress,
     id: station.id,
     temperature: station.temperature?.value,
+    humidity: station.relativeHumidity?.value,
+    CO: station.CO?.value,
     reliability: station.reliability?.value,
     pm1: station.PM1?.value,
     pm10: station.PM10?.value,
