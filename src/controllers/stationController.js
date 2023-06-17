@@ -28,7 +28,6 @@ const retrieveStation = async (stationId) => {
     if (station?.data && station?.data?.error === undefined) {
       const mappedStation = mapStation(station.data)
       const availableParams = await getAvailableParamsForStation(stationId)
-      console.log(availableParams)
       const completeStation = { availableParams, ...mappedStation }
       return Promise.resolve(completeStation)
     }
@@ -36,20 +35,15 @@ const retrieveStation = async (stationId) => {
   return Promise.resolve(undefined)
 }
 
-// stationId: identificador único de la estación, time: DAY/MONTH/YEAR, parameter: TEMPERATURE/PM#/LOQUESEA
 const retrieveStationHistory = async (stationId, fromDate, toDate, parameter) => {
   // mock para llenar el front con data
   // return Promise.resolve(getHistory(stationId, time, parameter))
   const result = await getHistoricDataFromStation(stationId, fromDate, toDate, parameter)
-  console.log(result)
-  if (result.length) {
-    const finalResult = {
-      label: parameter,
-      values: mapHistoricResult(result)
-    }
-    return Promise.resolve(finalResult)
+  const finalResult = {
+    label: parameter,
+    values: mapHistoricResult(result)
   }
-  return Promise.resolve(undefined)
+  return Promise.resolve(finalResult)
 }
 
 const retrieveAvailableParams = async (stationId) => {

@@ -24,12 +24,7 @@ stationsRouter.get('/:stationId', async (req, res, next) => {
 })
 
 stationsRouter.get('/:stationId/history', async (req, res, next) => {
-  const stationHistory = await retrieveStationHistory(req.params.stationId, req.query.fromDate, req.query.toDate, req.query.parameter)
-  if (stationHistory) {
-    res.send(stationHistory)
-  } else {
-    res.status(404).send(NOT_FOUND_ERROR)
-  }
+  res.send(await retrieveStationHistory(req.params.stationId, req.query.fromDate, req.query.toDate, req.query.parameter))
 })
 
 export { stationsRouter }
