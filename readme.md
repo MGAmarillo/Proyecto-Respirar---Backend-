@@ -63,13 +63,13 @@ Importar la [Colección de Postman](localOrion/Orion%20Local.postman_collection.
 #### 1- Crear imágen ####
 En el directorio raíz del proyecto, correr:
 ```bash
-$ docker build -f Dockerfile -t patricioc7/espirar-mapas-backend .
+$ docker build -f Dockerfile -t patricioc7/respirar-mapas-backend .
 ```
 
 #### 2- Correr imágen ####
 En el directorio raíz del proyecto, correr:
 ```bash
-$ docker run -e CYGNUS_DATABASE=sth_default -p 3001:3001 -e MONGODB_URI="{MONGODB_URI}" -e ORION_BASE_URL="{ORION_BASE_URL}" -e CYGNUS_DATABASE="{CYGNUS_DATABASE}" patricioc7/espirar-mapas-backend
+$ docker run -e CYGNUS_DATABASE=sth_default -p 3031:3031 -e MONGODB_URI="{MONGODB_URI}" -e ORION_BASE_URL="{ORION_BASE_URL}" -e CYGNUS_DATABASE="{CYGNUS_DATABASE}" patricioc7/espirar-mapas-backend
 ```
 
 ****
@@ -78,13 +78,13 @@ $ docker run -e CYGNUS_DATABASE=sth_default -p 3001:3001 -e MONGODB_URI="{MONGOD
 
 **GET** `/stations` Devuelve todas las estaciones
 
+**GET** `/stations/{stationId}` Devuelve los datos actualizados de la estación y una lista de los parametros de los que se tiene evolución histórica
+
+
 **GET** `/stations/{stationId}/history` Devuelve la evolución histórica de un parámetro de una estación  (detalles en query params)
 ```url
 stations/{stationId}/history?fromDate={fromDate}&toDate={toDate}&parameter={parameter}
 ```
-
-**GET** `/stations/{stationId}/availableparams` Devuelve una lista de los parametros de los que se tiene evolución histórica de una estación específica
-
 
 **POST** `/user/login` Logueo de usuario (devuelve JWT) - 
 ```json 

@@ -16,4 +16,4 @@ RUN npm install
 CMD [ "node", "./src/bin/www.js" ]
 
 # Exposing server port
-EXPOSE 3001
+EXPOSE 3031

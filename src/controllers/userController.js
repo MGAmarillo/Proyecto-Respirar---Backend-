@@ -7,7 +7,6 @@ const login = async (username, password) => {
   if (!user) {
     throw new Error('Credenciales no validas')
   }
-  console.log(user)
   const isMatch = await bcrypt.compare(password, user.password)
 
   if (!isMatch) {

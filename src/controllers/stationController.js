@@ -1,4 +1,4 @@
-import { getAllStationsFromOrion } from '../domain/orionService.js'
+import { getAllStationsFromOrion, getStationFromOrion } from '../domain/orionService.js'
 // import { getHistory } from '../domain/fakeStationHistory.js'
 import { getHistoricDataFromStation, getAvailableParamsForStation } from '../data/cygnusDao.js'
 
@@ -22,7 +22,19 @@ const retrieveAllStations = async (user, onlyUserStations) => {
   return Promise.resolve([])
 }
 
-// stationId: identificador único de la estación, time: DAY/MONTH/YEAR, parameter: TEMPERATURE/PM#/LOQUESEA
+const retrieveStation = async (stationId) => {
+  if (stationId) {
+    const station = await getStationFromOrion(stationId)
+    if (station?.data && station?.data?.error === undefined) {
+      const mappedStation = mapStation(station.data)
+      const availableParams = await getAvailableParamsForStation(stationId)
+      const completeStation = { availableParams, ...mappedStation }
+      return Promise.resolve(completeStation)
+    }
+  }
+  return Promise.resolve(undefined)
+}
+
 const retrieveStationHistory = async (stationId, fromDate, toDate, parameter) => {
   // mock para llenar el front con data
   // return Promise.resolve(getHistory(stationId, time, parameter))
@@ -35,7 +47,7 @@ const retrieveStationHistory = async (stationId, fromDate, toDate, parameter) =>
 }
 
 const retrieveAvailableParams = async (stationId) => {
-  return Promise.resolve(getAvailableParamsForStation(stationId))
+  return Promise.resolve()
 }
 
 const mapStation = (station) => {
@@ -43,6 +55,8 @@ const mapStation = (station) => {
     name: station.address?.value?.streetAddress,
     id: station.id,
     temperature: station.temperature?.value,
+    humidity: station.relativeHumidity?.value,
+    CO: station.CO?.value,
     reliability: station.reliability?.value,
     pm1: station.PM1?.value,
     pm10: station.PM10?.value,
@@ -65,4 +79,4 @@ const mapHistoricResult = (result) => {
   }
 }
 
-export { retrieveAllStations, retrieveStationHistory, retrieveAvailableParams }
+export { retrieveAllStations, retrieveStation, retrieveStationHistory, retrieveAvailableParams }
